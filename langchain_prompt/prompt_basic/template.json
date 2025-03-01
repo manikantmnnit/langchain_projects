@@ -1,0 +1,17 @@
+{
+    "name": null,
+    "input_variables": [
+        "length_input",
+        "style_input",
+        "topic_input"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "Act as a research assistant and provide an explanation of the {topic_input} library. Ensure the explanation follows these guidelines:\n\nExplanation Style: {style_input}\n\nIf 'Basic Introduction', provide a clear and concise overview of the library.\n\nIf 'Explain with real example', include a practical example or use case.\n\nIf 'Explain with code', provide a code snippet with comments to demonstrate its usage.\n\nIf 'Explain with Math logic', include mathematical formulations or logic behind the library's functionality.\n\nExplanation Length: {length_input}\n\nIf '2-3 sentences', keep the explanation brief and to the point.\n\nIf '2-3 paragraphs', provide a moderately detailed explanation.\n\nIf 'long explanation', include a comprehensive breakdown with examples, code, or math as needed.\n\nAdditional Details:\n\nHighlight the key features or functionalities of the {topic_input} library.\n\nIf applicable, explain how it compares to similar libraries or tools.\n\nUse simple and clear language to ensure the explanation is accessible to beginners.",
+    "template_format": "f-string",
+    "validate_template": false,
+    "_type": "prompt"
+}
