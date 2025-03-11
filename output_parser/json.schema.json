@@ -1,0 +1,28 @@
+
+# Define the JSON schema as a dictionary
+user_schema = {
+    "title": "Brief summary of a player {name}",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Full name of the player"
+        },
+        "age": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Age of the player, must be a positive integer"
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Valid email address"
+        },
+        'Height':{
+            'type':'string',
+             'type':['tall','younger','smaller'],
+             'description': " height of player ",
+                  }
+       },
+    "required": ["name", "email"]
+}

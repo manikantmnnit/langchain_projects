@@ -1,6 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate,ChatPromptTemplate,MessagesPlaceholder
 
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,6 +20,7 @@ llm=ChatOpenAI(
 #     print('AI: {result.content}')
 
 # major problem is that chatbot never remember the previous chat
+
 # Initialize chat history
 chat_history = []
 
@@ -35,3 +37,7 @@ while True:
 
 print(chat_history)
 
+
+# Problem: all chat are stored in the list but  type of message ( user message and ai response) is not defined
+# Solution: use  langchain_core message System messase AIMessage HumanMessage
+## -----*************************************** ---------------******************************
