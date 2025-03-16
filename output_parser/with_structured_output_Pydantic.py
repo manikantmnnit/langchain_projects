@@ -37,10 +37,10 @@ llm=ChatOpenAI()
 
 
 # # add annotation
-class Joke(BaseModel):
-    setup: StrictStr=Field(description="The setup of the joke")
-    punchline: StrictStr=Field(description="The punchline to the joke")
-    rating:  StrictStr=Field(description="How funny the joke is, from 1 to 10")
+# class Joke(BaseModel):
+#     setup: StrictStr=Field(description="The setup of the joke")
+#     punchline: StrictStr=Field(description="The punchline to the joke")
+#     rating:  StrictStr=Field(description="How funny the joke is, from 1 to 10")
 
 # structure_llm=llm.with_structured_output(Joke)
 # result=structure_llm.invoke("Why did the dog sit in the shade? Because he didn’t want to be a hot dog!")
@@ -79,13 +79,53 @@ class Joke(BaseModel):
 # asyncio.run(main())
 
 
-# load json schema
+#-----------------Example 5--------------------
+
+from annotated_types import MinLen
+from pydantic import  EmailStr, StringConstraints
+from typing import Annotated
+
+class Address(BaseModel):
+    Apartment: Annotated[str, StringConstraints(pattern=r'^\d{3}$')]  # Exactly 3 digits
+    street: Annotated[str, StringConstraints(pattern=r'^[a-zA-Z0-9 \#$_-]{4,15}$')]  # 4-15 characters with allowed symbols
+    City: Annotated[str, StringConstraints(pattern=r'^[a-zA-Z]+$')]  # Only letters, properly anchored
+    State: Annotated[str, StringConstraints(pattern=r'^[a-zA-Z]+$')]  # Only letters, properly anchored
 
 
-class player(BaseModel):
-    title:str
-    type:str
-    properties:list[str]
-    name:str
-    email:EmailStr
+class Student(BaseModel):
+    Name: str=Field(
+        min_length=2,
+        max_length=15,
+        pattern=r'^[a-zA-Z]'
+        )
+    Age: int=Field(
+        description='Age of student (must be greater than 17)',
+        gt=17,
+        default='18'
+        )
+    Email: EmailStr
+    Address: list[Address]
+    
+    
+new_student = {
+    "Name": "John",
+    "Age": 20,
+    "Email": "john@example.com",
+    "Address": [
+        {
+            "Apartment": "123",
+            "street": "Main St #45",
+            "City": "NewYork",
+            "State": "NY"
+        }
+    ]
+}
+
+# ✅ Creating an instance
+student_instance = Student(**new_student)
+print(student_instance)
+
+
+
+
 
