@@ -1,0 +1,63 @@
+
+DNA & RNA Basics
+DNA: Double-stranded molecule storing genetic instructions (A, T, C, G bases).
+
+RNA: Single-stranded, involved in protein synthesis (A, U, C, G bases).
+
+Python Libraries for DNA/RNA Analysis
+1. Biopython (Bio)
+Uses: Sequence manipulation, BLAST searches, parsing FASTA files.
+
+python
+Copy
+from Bio.Seq import Seq
+dna = Seq("ATGCGTA")
+print(dna.complement())  # Output: TACGCAT
+print(dna.transcribe())  # DNA → RNA: AUCGCAU
+2. DNA Features (dnacauldron)
+Uses: Genetic engineering (e.g., plasmid design).
+
+python
+Copy
+from dnacauldron import Repository
+repo = Repository()
+part = repo.import_part("ATGCCGGA", name="GeneX")
+3. RNA Structure (ViennaRNA)
+Uses: Predict RNA secondary structures.
+
+python
+Copy
+import RNA
+rna_sequence = "GGCUAUUAGC"
+structure, energy = RNA.fold(rna_sequence)
+print(structure)  # Output: ((...)). (dot-bracket notation)
+4. Visualization (plotly)
+Uses: Plot sequences or structures.
+
+python
+Copy
+import plotly.express as px
+data = {"Base": ["A", "T", "G", "C"], "Count": [25, 32, 18, 25]}
+fig = px.bar(data, x="Base", y="Count", title="DNA Base Frequency")
+fig.show()
+Example Workflow
+python
+Copy
+from Bio import SeqIO
+# Read a FASTA file
+for record in SeqIO.parse("gene.fasta", "fasta"):
+    print(f"ID: {record.id}, Sequence: {record.seq[:10]}...")
+    rna = record.seq.transcribe()
+    print(f"RNA: {rna}")
+Key Applications
+Genome Assembly: Stitch DNA fragments.
+
+CRISPR Design: Find guide RNA targets.
+
+Phylogenetics: Compare sequences across species.
+
+Install Libraries:
+
+bash
+Copy
+pip install biopython dnacauldron viennarna plotly
